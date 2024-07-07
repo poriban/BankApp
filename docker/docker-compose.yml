@@ -1,0 +1,16 @@
+services:
+  db:
+    container_name: bank_db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: simple_bank
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
