@@ -28,7 +28,16 @@ migratedown1:
 go-package:
 	go get github.com/stretchr/testify
 
+sqlc:
+	sqlc generate
+
 test:
 	go test -v -cover -short ./...
 
-.PHONY: docker-ps docker-ps-a docker-images migrateup migrateup1 migratedown migratedown1 go-package test
+server:
+	go run main.go
+
+mock:
+	mockgen -package mockdb -destination db/mock/store.go  github.com/MasaakiShigezumi/BankApp/db/sqlc Store
+
+.PHONY: docker-ps docker-ps-a docker-images migrateup migrateup1 migratedown migratedown1 go-package sqlc test server mock

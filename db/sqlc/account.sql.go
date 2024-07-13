@@ -13,7 +13,7 @@ const addAccountBalance = `-- name: AddAccountBalance :one
 UPDATE accounts
 SET balance = balance + $1
 WHERE id = $2
-    RETURNING id, owner, balance, currency, created_at
+RETURNING id, owner, balance, currency, created_at
 `
 
 type AddAccountBalanceParams struct {
@@ -40,8 +40,8 @@ INSERT INTO accounts (
     balance,
     currency
 ) VALUES (
-             $1, $2, $3
-         ) RETURNING id, owner, balance, currency, created_at
+    $1, $2, $3
+) RETURNING id, owner, balance, currency, created_at
 `
 
 type CreateAccountParams struct {
@@ -155,7 +155,7 @@ const updateAccount = `-- name: UpdateAccount :one
 UPDATE accounts
 SET balance = $2
 WHERE id = $1
-    RETURNING id, owner, balance, currency, created_at
+RETURNING id, owner, balance, currency, created_at
 `
 
 type UpdateAccountParams struct {
